@@ -1,0 +1,49 @@
+/* https://www.acmicpc.net/problem/26099
+ * 백준 26099번 : 설탕 배달 2
+ * 
+ * 가장 적은 수의 봉지에 설탕을 담아야 하므로, 5킬로그램짜리 봉지를 우선적으로 써야 한다.
+ *   1. 4와 7은 3과 5짜리 봉지로 만들 수 없다.
+ *   2. 설탕이 5로 나누어 떨어질 경우 -> 설탕을 5로 나눈 수가 정답이다.
+ *   3. 설탕을 5로 나눈 나머지에 따라 규칙이 존재한다.
+ *   
+ *     1) 나머지가 1인 경우
+ *       ex) 11 -> 11 = 5 * 2 + 1 이며, 5를 하나 빼주면 나머지가 6이 되므로 3 * 2로 해결 가능하다.
+ *       즉, 전체 / 5 + 1 의 봉지가 필요
+ *        
+ *     2) 나머지가 2인 경우
+ *       ex) 17 -> 17 = 5 * 3 + 2 이며, 5를 두개 빼주면 나머지가 12가 되므로 3 * 4로 해결 가능하다.
+ *       즉, 전체 / 5 + 2 의 봉지가 필요
+ *       
+ *     3) 나머지가 3인 경우
+ *       ex) 23 -> 23 = 5 * 4 + 3 이며, 3을 하나 더해주면 되므로 3 * 1로 해결 가능하다.
+ *       즉, 전체 / 5 + 1 의 봉지가 필요
+ *       
+ *     4) 나머지가 4인 경우
+ *       ex) 34 -> 34 = 5 * 6 + 4 이며, 5를 하나 빼주면 나머지가 9가 되므로 3 * 3으로 해결 가능하다.
+ *       즉, 전체 / 5 + 2 의 봉지가 필요
+ *       
+ *     => 나머지가 1인 경우와 3인 경우가 같고, 2인 경우와 4인 경우가 같다.
+ */
+
+import java.util.Scanner;
+
+public class No_26099 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long sugar = sc.nextLong();
+		sc.close();
+		
+		if (sugar == 4 || sugar == 7) {
+			System.out.println(-1);
+		}
+		else if (sugar % 5 == 0) {
+			System.out.println(sugar / 5);
+		}
+		else if ((sugar % 5) == 1 || (sugar % 5) == 3) {
+			System.out.println(sugar / 5 + 1);
+		}
+		else if ((sugar % 5) == 2 || (sugar % 5) == 4) {
+			System.out.println(sugar / 5 + 2);
+		}
+	}
+}
